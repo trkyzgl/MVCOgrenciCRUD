@@ -41,7 +41,6 @@ namespace MVCProjem.Controllers
                 ogrenci.ad=ogrenciModel.ad;
                 ogrenci.soyad=ogrenciModel.soyad;
             }
-
             _dbcontext.Ogrenciler.Update(ogrenci);
             _dbcontext.SaveChanges();
 
@@ -68,6 +67,8 @@ namespace MVCProjem.Controllers
         {
             return View();
         }
+
+        /*Ogrencilerin DB den çelildiği alan*/
         public IActionResult Ogrenciler()
         {
             List<OgrenciModel> ogrenciModels = _dbcontext.Ogrenciler.ToList();
