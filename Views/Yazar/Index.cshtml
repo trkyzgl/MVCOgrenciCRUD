@@ -1,0 +1,37 @@
+﻿@model List< MVCProjem.Models.YazarModel>
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+<html>
+
+
+<head>
+    <title></title>
+</head>
+
+<body>
+
+
+    <div>
+        <h1>Ekleme</h1>
+        <form asp-action="Create" method="post">
+            <table>
+                <input name="ad" id="ad" type="text" placeholder="Ad" required="" />
+                <br/>
+                <input name="soyad" id="soyad" type="text" placeholder="Soyad" required="" />
+                <br/>
+                <input type="submit" value="Yazarı Ekle" />
+            </table>
+        </form>
+    </div>
+
+
+
+
+
+</body>
+</html>
+
