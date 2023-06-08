@@ -20,6 +20,8 @@ namespace MVCProjem.Controllers
 
         public IActionResult Index()
         {
+
+
             //string connectString = _dbcontext.GetConnectionString("DefaultConnection");
             //SqlConnection sql = new SqlConnection(connectString);
             //sql.Open();
@@ -37,11 +39,6 @@ namespace MVCProjem.Controllers
         public IActionResult Update(OgrenciModel ogrenciModel)
         {
 
-            if (ogrenciModel.ogrno == 0)
-            {
-                return View("Ogrenciler", "Home");
-            }
-
 
             var ogrenci = _dbcontext.Ogrenciler.AsNoTracking().FirstOrDefault(q=>q.ogrno == ogrenciModel.ogrno);
             if (ogrenci != null) { 
@@ -51,7 +48,6 @@ namespace MVCProjem.Controllers
                 ogrenci.cinsiyet=ogrenciModel.cinsiyet;
                 ogrenci.sinif=ogrenciModel.sinif;
                 ogrenci.puan=ogrenciModel.puan;
-
             }
             _dbcontext.Ogrenciler.Update(ogrenci);
             _dbcontext.SaveChanges();
