@@ -32,7 +32,7 @@ namespace MVCProjem.Controllers
             ////ViewData["ad"] = name;
             ////ViewData["soyad"] = surname;
             //sql.Close();
-            return View();
+            return RedirectToAction("Ogrenciler", "Home");//return View();return View();
         }
 
         [HttpPost]

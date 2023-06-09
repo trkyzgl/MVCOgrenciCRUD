@@ -29,6 +29,27 @@
     </div>
 
 
+    <div class="column" style="width:40%">
+        <h1>Öğrenciler</h1>
+        <!-- <p>@ViewData["Title"]</p>-->
+        <table id="ogrenciList">
+            <tr>
+                <th>ad</th>
+                <th>soyad</th>
+ 
+            </tr>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@Html.Label( item.ad) </td>
+                    <td>@Html.Label( item.soyad)</td>
+                    <td><button type="button" onclick="EditFunc(@Json.Serialize(item).ToString())">Edit</button></td>
+                    <td><button type="button" onclick="DeleteFunc(@Json.Serialize(item).ToString())">Delete</button></td>
+                </tr>
+            }
+        </table>
+    </div>
+
 
 
 

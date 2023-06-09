@@ -18,10 +18,11 @@ namespace MVCProjem.Controllers
             this._dbcontext = config;
         }
 
-
         public IActionResult Index()
         {
-            return View();
+            List<YazarModel> list = _dbcontext.Yazarlar.ToList();
+            return View(list);//Ogrenciler();
+
         }
 
         public IActionResult Create(YazarModel yazarModel)
@@ -29,8 +30,15 @@ namespace MVCProjem.Controllers
             _dbcontext.Yazarlar.Add(yazarModel);
             _dbcontext.SaveChanges();
 
-            return RedirectToAction("Yazar", "Home");//Ogrenciler();
+            return RedirectToAction("Ogrenciler", "Home");//Ogrenciler();
         }
+
+        public IActionResult Yazar(YazarModel yazarModel)
+        {
+            List<YazarModel> list = _dbcontext.Yazarlar.ToList();
+            return View(list);//Ogrenciler();
+        }
+
 
 
     }
