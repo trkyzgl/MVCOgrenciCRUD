@@ -39,6 +39,15 @@ namespace MVCProjem.Controllers
             return View(list);//Ogrenciler();
         }
 
+        public IActionResult Delete(YazarModel yazarModel)
+        {
+            //_dbcontext.Yazarlar.Remove(yazarModel);
+            //_dbcontext.SaveChanges();
+            //return RedirectToAction("Yazarlar","Home");
+            return RedirectToAction("Index");
+
+        }
+
 
 
     }
