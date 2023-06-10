@@ -32,6 +32,10 @@ namespace MVCProjem.Controllers
             ////ViewData["ad"] = name;
             ////ViewData["soyad"] = surname;
             //sql.Close();
+            //ViewData["Ad"] = "Gençay Yıldız";
+
+           
+
             return RedirectToAction("Ogrenciler", "Home");//return View();return View();
         }
 
@@ -39,20 +43,20 @@ namespace MVCProjem.Controllers
         public IActionResult Update(OgrenciModel ogrenciModel)
         {
 
-
-            var ogrenci = _dbcontext.Ogrenciler.AsNoTracking().FirstOrDefault(q=>q.ogrno == ogrenciModel.ogrno);
-            if (ogrenci != null) { 
-                ogrenci.ad=ogrenciModel.ad;
-                ogrenci.soyad=ogrenciModel.soyad;
-                ogrenci.dtarih=ogrenciModel.dtarih;
-                ogrenci.cinsiyet=ogrenciModel.cinsiyet;
-                ogrenci.sinif=ogrenciModel.sinif;
-                ogrenci.puan=ogrenciModel.puan;
+            var ogrenci = _dbcontext.Ogrenciler.AsNoTracking().FirstOrDefault(q => q.ogrno == ogrenciModel.ogrno);
+            if (ogrenci != null)
+            {
+                ogrenci.ad = ogrenciModel.ad;
+                ogrenci.soyad = ogrenciModel.soyad;
+                ogrenci.dtarih = ogrenciModel.dtarih;
+                ogrenci.cinsiyet = ogrenciModel.cinsiyet;
+                ogrenci.sinif = ogrenciModel.sinif;
+                ogrenci.puan = ogrenciModel.puan;
             }
             _dbcontext.Ogrenciler.Update(ogrenci);
             _dbcontext.SaveChanges();
 
-            var temp = _dbcontext.Ogrenciler.Where(q => q.ad.Contains(ogrenciModel.ad)).ToList();   
+            var temp = _dbcontext.Ogrenciler.Where(q => q.ad.Contains(ogrenciModel.ad)).ToList();
 
             //if (ogrenciModel.ogrno == null || string.IsNullOrEmpty(ogrenciModel.ad) || string.IsNullOrEmpty(ogrenciModel.soyad))
             //{
@@ -99,7 +103,6 @@ namespace MVCProjem.Controllers
 
             for (int i = 0; i < dt.Rows.Count; i++)
             {
-
                 OgrenciModel deger = new OgrenciModel
                 {
                     //Id = Convert.ToInt32(dt.Rows[i]["Id"].ToString()),
@@ -117,8 +120,7 @@ namespace MVCProjem.Controllers
             */
             return View(ogrenciModels);
         }
-    
-        
+
         /*Bu alan silme işlemi yapar*/
         public IActionResult Delete(OgrenciModel ogrenciModel)
         {
@@ -165,12 +167,15 @@ namespace MVCProjem.Controllers
         int count;
         public IActionResult Search(OgrenciModel ogrenciModel)
         {
-            List<OgrenciModel> list = _dbcontext.Ogrenciler.Where(x => x.ad.Contains(ogrenciModel.ad)).ToList();
+            List<OgrenciModel> list = _dbcontext.Ogrenciler.Where(x => (x.ad+ " "+x.soyad).Contains(ogrenciModel.ad)).ToList();
             count = list.Count();
-            ViewData["say"] = count;
+            //ViewData["say"] = count;
+            //ViewBag.FirstName = "Yusuf";
+            //ViewBag.LastName = "SEZER";
+            //ViewData["Ad"] = "Gençay Yıldız";
+            TempData["Ad"] = "Gençay Yıldız";
+            TempData["say"] = count;
 
-            ViewBag.FirstName = "Yusuf";
-            ViewBag.LastName = "SEZER";
 
             return RedirectToAction("Ogrenciler", "Home");
         }

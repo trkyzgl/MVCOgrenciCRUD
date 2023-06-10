@@ -36,7 +36,7 @@
             <!-- <p>@ViewData["Title"]</p>-->
             <table id="ogrenciList">
                 <tr>
-                    <th></></th>
+                    <th>ad</th>
                     <th>soyad</th>
 
                 </tr>
@@ -49,6 +49,10 @@
                         <td><button type="button" onclick="DeleteFunc(@Json.Serialize(item).ToString())">Delete</button></td>
                     </tr>
                 }
+
+                @TempData["Veri"]
+                @TempData["say"]
+
             </table>
         </div>
 
@@ -84,6 +88,7 @@
                 </table>
             </form>
         </div>
+
         <div class="column" style="width:20%">
             <h1>Arama </h1>
             <form asp-action="Delete" method="post">

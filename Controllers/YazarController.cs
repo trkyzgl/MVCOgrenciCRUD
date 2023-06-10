@@ -20,6 +20,8 @@ namespace MVCProjem.Controllers
         public IActionResult Index()
         {
             List<YazarModel> list = _dbcontext.Yazarlar.OrderByDescending(q=>q.yazarno).ToList();
+            ViewData["Ad"] = "Gençay Yıldız";
+            TempData["Ad"] = "Gençay Yıldız";
             return View(list);//Ogrenciler();
         }
 
@@ -41,6 +43,7 @@ namespace MVCProjem.Controllers
             //return RedirectToAction("Yazarlar","Home");
             return RedirectToAction("Index");
         }
+
 
 
 

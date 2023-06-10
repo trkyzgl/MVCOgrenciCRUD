@@ -1,12 +1,14 @@
 ﻿@using Newtonsoft.Json;
 @model List<MVCProjem.Models.OgrenciModel>
-@ViewData["say"]
+@TempData["Veri"]
+
 
 
 
 @{
     ViewData["Title"] = "Ogrenciler";
-    var gelen = (ViewData["say"]);
+    //var gelen = (ViewData["say"]);
+    //var text = ViewData["Ad"];
 
 }
 <!--
@@ -83,7 +85,7 @@
             <tr>
                 <th>ad</th>
                 <th>soyad</th>
-                <th>Ögr no</th>
+                <th>no</th>
                 <th>Snf</th>
                 <th>Seç</th>
             </tr>
@@ -111,10 +113,25 @@
                     <input type="submit" value="Ara" />
                 </table>
             </form>
+
             
 
-            Merhaba ben @Convert.ToString(ViewData["FirstName"]) @Convert.ToString(ViewData["LastName"])
         </table>
+        <div>
+
+            @if ( Convert.ToInt32( @TempData["say"])>0)
+            {
+                      
+            <h6>aranılan özellikte @TempData["say"] adet veri var </h6>
+            
+            //@TempData["say"]
+            }
+
+
+
+
+        </div>
+
     </div>
 
     <div class="column" style="width:20%">
