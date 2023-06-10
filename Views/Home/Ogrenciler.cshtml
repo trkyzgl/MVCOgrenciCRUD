@@ -45,12 +45,12 @@
             </table>
         </form>
     </div>
-    
+
     <div class="column" style="width:20%">
         <h1>Güncelleme</h1>
         <form asp-action="Update" method="post">
             <table>
-                
+
                 <input style="display:none ;  visibility: hidden;" name="ogrno" id="ogrno" type="text" placeholder="Öğrenci No" />
                 </br><!---->
                 <input name="ad" id="ad" type="text" placeholder="Ad" />
@@ -69,7 +69,7 @@
                 <select id="MovieType" name="MovieType">
                 @foreach (var item in Model)
                 {
-                            <option value="">@Html.Label(item.ogrno.ToString())</option>
+                                    <option value="">@Html.Label(item.ogrno.ToString())</option>
                 }
                 </select>
                 -->
@@ -109,55 +109,50 @@
         <table id="ogrenciArama">
             <form asp-action="Search" method="post">
                 <table>
-                    <input  name="ad" id="adAra" type="text" placeholder="Öğrenci Ara"/>                
+                    <input name="ad" id="adAra" type="text" placeholder="Öğrenci Ara" />
                     <input type="submit" value="Ara" />
                 </table>
             </form>
-
-            
-
         </table>
         <div>
-
-            @if ( Convert.ToInt32( @TempData["say"])>0)
+            @if (Convert.ToInt32(@TempData["say"]) > 0)
             {
-                      
-            <h6>aranılan özellikte @TempData["say"] adet veri var </h6>
-            
-            //@TempData["say"]
+                <h6>aranılan özellikte @TempData["say"] adet veri var </h6>
+                //@TempData["say"]
             }
 
-
-
-
+        </div>
+        <br /><br /><br />
+        <div>
+            <!-- <p>@ViewData["Title"]</p>-->
+            
+            <table id="ogrenciDelete">
+                <form asp-action="Delete" method="post">
+                    <table>
+                        <h1>Delete</h1>
+                        <input style="visibility: hidden;" name="ogrno" id="ogrnoSil" type="text" placeholder="Öğrenci No" />
+                        </br>
+                        <input name="ad" id="adSil" type="text" placeholder="Ad" />
+                        <br />
+                        <input name="soyad" id="soyadSil" type="text" placeholder="Soyad" />
+                        <br />
+                        <!--
+                        <select id="MovieType" name="MovieType">
+                        @foreach (var item in Model)
+                        {
+                                                <option value="">@Html.Label(item.ogrno.ToString())</option>
+                        }
+                        </select>
+                        -->
+                        <input type="submit" value="Delete" />
+                    </table>
+                </form>
+            </table>
         </div>
 
     </div>
 
     <div class="column" style="width:20%">
-        <!-- <p>@ViewData["Title"]</p>-->
-        <h1>Delete</h1>
-        <table id="ogrenciDelete">
-            <form asp-action="Delete" method="post">
-                <table>
-                    <input style="visibility: hidden;" name="ogrno" id="ogrnoSil" type="text" placeholder="Öğrenci No" />
-                    </br>
-                    <input name="ad" id="adSil" type="text" placeholder="Ad" />
-                    <br />
-                    <input name="soyad" id="soyadSil" type="text" placeholder="Soyad" />
-                    <br />
-                    <!--
-                    <select id="MovieType" name="MovieType">
-                    @foreach (var item in Model)
-                    {
-                                <option value="">@Html.Label(item.ogrno.ToString())</option>
-                    }
-                    </select>
-                    -->
-                    <input type="submit" value="Delete" />
-                </table>
-            </form>
-        </table>
     </div>
 
 </div>
