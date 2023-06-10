@@ -10,7 +10,6 @@ namespace MVCProjem.Controllers
     public class YazarController : Controller
     {
 
-
         private readonly MVCProjemContext _dbcontext;
 
         public YazarController(MVCProjemContext config)
@@ -20,32 +19,27 @@ namespace MVCProjem.Controllers
 
         public IActionResult Index()
         {
-            List<YazarModel> list = _dbcontext.Yazarlar.ToList();
+            List<YazarModel> list = _dbcontext.Yazarlar.OrderByDescending(q=>q.yazarno).ToList();
             return View(list);//Ogrenciler();
-
         }
 
         public IActionResult Create(YazarModel yazarModel)
         {
             _dbcontext.Yazarlar.Add(yazarModel);
             _dbcontext.SaveChanges();
-
-            return RedirectToAction("Ogrenciler", "Home");//Ogrenciler();
+            return RedirectToAction("Index", "Yazar");//Ogrenciler();
         }
-
         public IActionResult Yazar(YazarModel yazarModel)
         {
             List<YazarModel> list = _dbcontext.Yazarlar.ToList();
             return View(list);//Ogrenciler();
         }
-
         public IActionResult Delete(YazarModel yazarModel)
         {
-            //_dbcontext.Yazarlar.Remove(yazarModel);
-            //_dbcontext.SaveChanges();
+            _dbcontext.Yazarlar.Remove(yazarModel);
+            _dbcontext.SaveChanges();
             //return RedirectToAction("Yazarlar","Home");
             return RedirectToAction("Index");
-
         }
 
 

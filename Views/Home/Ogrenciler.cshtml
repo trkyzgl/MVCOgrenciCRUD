@@ -1,7 +1,12 @@
 ﻿@using Newtonsoft.Json;
 @model List<MVCProjem.Models.OgrenciModel>
+@ViewData["say"]
+
+
+
 @{
     ViewData["Title"] = "Ogrenciler";
+    var gelen = (ViewData["say"]);
 
 }
 <!--
@@ -16,6 +21,7 @@
     <button type="submit"> Ara </button>-->
 }
 <div class="row">
+
     <div class="column" style="width:20%">
         <h1>Ekleme</h1>
         <form asp-action="Create" method="post">
@@ -37,6 +43,7 @@
             </table>
         </form>
     </div>
+    
     <div class="column" style="width:20%">
         <h1>Güncelleme</h1>
         <form asp-action="Update" method="post">
@@ -69,7 +76,7 @@
         </form>
     </div>
 
-    <div class="column" style="width:40%">
+    <div class="column" style="width:35%">
         <h1>Öğrenciler</h1>
         <!-- <p>@ViewData["Title"]</p>-->
         <table id="ogrenciList">
@@ -94,7 +101,25 @@
         </table>
     </div>
 
+    <div class="column" style="width:25%">
+        <!-- <p>@ViewData["Title"]</p>-->
+        <h1>Arama</h1>
+        <table id="ogrenciArama">
+            <form asp-action="Search" method="post">
+                <table>
+                    <input  name="ad" id="adAra" type="text" placeholder="Öğrenci Ara"/>                
+                    <input type="submit" value="Ara" />
+                </table>
+            </form>
+            <div>
+                Verimiz: @ViewData["vieweGonderilenVeri"]
+            </div>
+            <h3>Verimiz: @ViewData["say"].ToString()</h3>
+            <h3>Verimiz: @gelen</h3>
 
+            Merhaba ben @Convert.ToString(ViewData["FirstName"]) @Convert.ToString(ViewData["LastName"])
+        </table>
+    </div>
 
     <div class="column" style="width:20%">
         <!-- <p>@ViewData["Title"]</p>-->

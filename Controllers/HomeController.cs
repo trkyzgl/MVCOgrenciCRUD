@@ -162,6 +162,22 @@ namespace MVCProjem.Controllers
             return RedirectToAction("Ogrenciler", "Home");//return View();
         }
 
+        int count;
+        public IActionResult Search(OgrenciModel ogrenciModel)
+        {
+            List<OgrenciModel> list = _dbcontext.Ogrenciler.Where(x => x.ad.Contains(ogrenciModel.ad)).ToList();
+            count = list.Count();
+            ViewData["say"] = count;
+
+            ViewBag.FirstName = "Yusuf";
+            ViewBag.LastName = "SEZER";
+
+            return RedirectToAction("Ogrenciler", "Home");
+        }
+
+
+
+
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {

@@ -9,7 +9,6 @@ namespace MVCProjem.Models
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int ogrno { get; set; }
-        
         public string ad { get; set; }
         public string soyad { get; set; }
         public DateTime? dtarih { get; set; } 
