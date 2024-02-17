@@ -17,23 +17,23 @@ namespace MVCProjem.Controllers
 
         public IActionResult Index()
         {
-            string connectionString = _configuration.GetConnectionString("DefaultConnection");
-            SqlConnection sqlConnection = new SqlConnection(connectionString);
-            sqlConnection.Open();
-            string sorgu = "select top 10 * from ogrenci";
-            SqlCommand command = new SqlCommand(sorgu, sqlConnection);
-            command.ExecuteNonQuery();
-            List<OgrenciModel> list = new List<OgrenciModel>();
-            //DataTable dt = new DataTable();
-
-            SqlDataAdapter adptr = new SqlDataAdapter(sorgu, sqlConnection);
-            DataTable dt = new DataTable(sorgu);
-            adptr.Fill(dt);
-
-
-            list.Add(new OgrenciModel() { });
-
-            sqlConnection.Close();  
+           //string connectionString = _configuration.GetConnectionString("DefaultConnection");
+           //SqlConnection sqlConnection = new SqlConnection(connectionString);
+           //sqlConnection.Open();
+           //string sorgu = "select top 10 * from ogrenci";
+           //SqlCommand command = new SqlCommand(sorgu, sqlConnection);
+           //command.ExecuteNonQuery();
+           //List<OgrenciModel> list = new List<OgrenciModel>();
+           ////DataTable dt = new DataTable();
+           //
+           //SqlDataAdapter adptr = new SqlDataAdapter(sorgu, sqlConnection);
+           //DataTable dt = new DataTable(sorgu);
+           //adptr.Fill(dt);
+           //
+           //
+           //list.Add(new OgrenciModel() { });
+           //
+           //sqlConnection.Close();  
             return View();
         }
         public IActionResult OgrenciList()

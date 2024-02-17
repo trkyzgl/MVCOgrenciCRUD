@@ -56,7 +56,7 @@ namespace MVCProjem.Controllers
             _dbcontext.Ogrenciler.Update(ogrenci);
             _dbcontext.SaveChanges();
 
-            var temp = _dbcontext.Ogrenciler.Where(q => q.ad.Contains(ogrenciModel.ad)).ToList();
+            var temp = _dbcontext.Ogrenciler.Where(q => q.ad.Contains(ogrenciModel.ad)).Take(10).ToList();
 
             //if (ogrenciModel.ogrno == null || string.IsNullOrEmpty(ogrenciModel.ad) || string.IsNullOrEmpty(ogrenciModel.soyad))
             //{
@@ -83,7 +83,9 @@ namespace MVCProjem.Controllers
         /*Ogrencilerin DB den çelildiği alan*/
         public IActionResult Ogrenciler()
         {
-            List<OgrenciModel> ogrenciModels = _dbcontext.Ogrenciler.ToList();
+
+            // öğrenci listesinden 5 öğrenci çekelim
+            List<OgrenciModel> ogrenciModels = _dbcontext.Ogrenciler.Take(5).ToList();
             //return View(objList);
             /*
             string connectString = _configuration.GetConnectionString("DefaultConnection");
