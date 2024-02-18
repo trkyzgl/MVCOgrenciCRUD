@@ -16,8 +16,6 @@ namespace MVCProjem.Controllers
             this._dbcontext = config;
         }
 
-
-
         public IActionResult Index()
         {
 
@@ -34,9 +32,9 @@ namespace MVCProjem.Controllers
             //sql.Close();
             //ViewData["Ad"] = "Gençay Yıldız";
 
-           
+            return View();
 
-            return RedirectToAction("Ogrenciler", "Home");//return View();return View();
+            //return RedirectToAction("Ogrenciler", "Home");//return View();return View();
         }
 
         [HttpPost]
@@ -143,15 +141,15 @@ namespace MVCProjem.Controllers
 
             _dbcontext.Ogrenciler.Add(ogrenciModel);
             _dbcontext.SaveChanges();
-            ////klasik yöntem
-            //// string t = Convert.ToDateTime(ogrenciModel.dtarih).ToString("dd.MM.yyyy");
-            // string connectionString = _configuration.GetConnectionString("DefaultConnection");
-            // SqlConnection sql = new SqlConnection(connectionString);
-            // sql.Open();
+            //klasik yöntem
+            //string t = Convert.ToDateTime(ogrenciModel.dtarih).ToString("dd.MM.yyyy");
+            //string connectionString = _configuration.GetConnectionString("DefaultConnection");
+            //SqlConnection sql = new SqlConnection(connectionString);
+            //sql.Open();
 
-            // string sorgu = "insert into  Ogrenciler(ad,soyad,dtarih,cinsiyet,sinif,puan) values(" +
-            //     "'"+ogrenciModel.ad.ToString()+ "','" + ogrenciModel.soyad.ToString() + "' ,'" + ogrenciModel.dtarih+ "'  , '" + ogrenciModel.cinsiyet.ToString() + "', '" + ogrenciModel.sinif.ToString()+ 
-            //     "'," +ogrenciModel.puan+")";
+            //string sorgu = "insert into  Ogrenciler(ad,soyad,dtarih,cinsiyet,sinif,puan) values(" +
+            //"'"+ogrenciModel.ad.ToString()+ "','" + ogrenciModel.soyad.ToString() + "' ,'" + ogrenciModel.dtarih+ "'  , '" + ogrenciModel.cinsiyet.ToString() + "', '" + ogrenciModel.sinif.ToString()+ 
+            //"'," +ogrenciModel.puan+")";
 
             // SqlCommand cmd = new SqlCommand(sorgu,sql);
             // cmd.ExecuteNonQuery();
@@ -162,6 +160,7 @@ namespace MVCProjem.Controllers
             //MVCProjemContext context = new MVCProjemContext();
             //context.Ogrenciler.Add(ogrenciModel);
             //context.SaveChanges();
+
 
             return RedirectToAction("Ogrenciler", "Home");//return View();
         }
@@ -181,8 +180,6 @@ namespace MVCProjem.Controllers
 
             return RedirectToAction("Ogrenciler", "Home");
         }
-
-
 
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
