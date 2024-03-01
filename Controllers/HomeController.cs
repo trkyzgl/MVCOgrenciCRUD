@@ -136,11 +136,13 @@ namespace MVCProjem.Controllers
             //sql.Close();
             return RedirectToAction("Ogrenciler", "Home");//return View();
         }
+        
         public IActionResult Create(OgrenciModel ogrenciModel)
         {
 
             _dbcontext.Ogrenciler.Add(ogrenciModel);
             _dbcontext.SaveChanges();
+            #region
             //klasik yöntem
             //string t = Convert.ToDateTime(ogrenciModel.dtarih).ToString("dd.MM.yyyy");
             //string connectionString = _configuration.GetConnectionString("DefaultConnection");
@@ -160,8 +162,7 @@ namespace MVCProjem.Controllers
             //MVCProjemContext context = new MVCProjemContext();
             //context.Ogrenciler.Add(ogrenciModel);
             //context.SaveChanges();
-
-
+            #endregion
             return RedirectToAction("Ogrenciler", "Home");//return View();
         }
 
@@ -181,15 +182,11 @@ namespace MVCProjem.Controllers
             return RedirectToAction("Ogrenciler", "Home");
         }
 
-
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
-
-
-
 
     }
 }
