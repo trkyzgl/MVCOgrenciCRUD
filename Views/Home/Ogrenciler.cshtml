@@ -1,0 +1,195 @@
+﻿@using Newtonsoft.Json;
+@model List<MVCProjem.Models.OgrenciModel>
+@TempData["Veri"]
+
+
+
+
+@{
+    ViewData["Title"] = "Ogrenciler";
+    //var gelen = (ViewData["say"]);
+    //var text = ViewData["Ad"];
+
+}
+<!--
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+</div>
+-->
+@using (Html.BeginForm("ogrenciler", "Controller"))
+{
+    <!--<input type="search" name = "keyword" placeholder = "aranacak ürün..." />
+    <button type="submit"> Ara </button>-->
+}
+<div class="row">
+
+    <div class="column" style="width:20%">
+        <h1> <u>Ekleme</u> </h1>
+        <form asp-action="Create" method="post">
+            <table>
+                </br>
+                <input name="ad" id="adAdd" type="text" placeholder="Ad" required="" />
+                <br />
+                <input name="soyad" id="soyadAdd" type="text" placeholder="Soyad" required="" />
+                <br />
+                <input name="dtarih" id="dtarihAdd" type="text" placeholder="Doğum Tarihi: 01.01.1900" required="" />
+                <br />
+                <input name="cinsiyet" id="cinsiyetAdd" type="text" placeholder="Cinsiyet" required="" />
+                <br />
+                <input name="sinif" id="sinifAdd" type="text" placeholder="Sınıf" required="" />
+                <br />
+                <input name="puan" id="puanAdd" type="text" placeholder="Puan" required="" />
+                </br>
+                <input type="submit" value="Ekle" />
+            </table>
+        </form>
+    </div>
+
+    <div class="column" style="width:20%">
+        <h1>Güncelleme</h1>
+        <form asp-action="Update" method="post">
+            <table>
+                <input style="display:none ;  visibility: hidden;" name="ogrno" id="ogrno" type="text" placeholder="Öğrenci No" />
+                </br><!---->
+                <input name="ad" id="ad" type="text" placeholder="Ad" />
+                <br />
+                <input name="soyad" id="soyad" type="text" placeholder="Soyad" />
+                <br />
+                <input name="dtarih" id="dtarih" type="text" placeholder="Doğum Tarihi:01.01.1990" />
+                <br />
+                <input name="cinsiyet" id="cinsiyet" type="text" placeholder="Cinsiyet" />
+                <br />
+                <input name="sinif" id="sinif" type="text" placeholder="Sınıf" />
+                <br />
+                <input name="puan" id="puan" type="text" placeholder="Puan" />
+                <br />
+                <!--
+                <select id="MovieType" name="MovieType">
+                @foreach (var item in Model)
+                {
+                                    <option value="">@Html.Label(item.ogrno.ToString())</option>
+                }
+                </select>
+                -->
+                <input type="submit" value="Guncelle" />
+            </table>
+        </form>
+    </div>
+
+    <div class="column" style="width:35%">
+        <h1>Öğrenciler</h1>
+        <!-- <p>@ViewData["Title"]</p>-->
+        <table id="ogrenciList">
+            <tr>
+                <th>ad</th>
+                <th>soyad</th>
+                <th>no</th>
+                <th>Snf</th>
+                <th>Seç</th>
+            </tr>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@Html.Label( item.ad) </td>
+                    <td>@Html.Label( item.soyad)</td>
+                    <td>@Html.Label( item.ogrno.ToString())</td>
+                    <td>@Html.Label( item.sinif)</td>
+                    <td><button type="button" onclick="EditFunc(@Json.Serialize(item).ToString())">Edit</button></td>
+                    <td><button type="button" onclick="DeleteFunc(@Json.Serialize(item).ToString())">Delete</button></td>
+                </tr>
+            }
+        </table>
+    </div>
+
+    <div class="column" style="width:25%">
+        <!-- <p>@ViewData["Title"]</p>-->
+        <h1>Arama</h1>
+        <table id="ogrenciArama">
+            <form asp-action="Search" method="post">
+                <table>
+                    <input name="ad" id="adAra" type="text" placeholder="Öğrenci Ara" />
+                    <input type="submit" value="Ara" />
+                </table>
+            </form>
+        </table>
+        <div>
+            @if (Convert.ToInt32(@TempData["say"]) > 0)
+            {
+                <h6>aranılan özellikte @TempData["say"] adet veri var </h6>
+                //@TempData["say"]
+            }
+
+        </div>
+        <br /><br /><br />
+        <div>
+            <!-- <p>@ViewData["Title"]</p>-->
+            
+            <table id="ogrenciDelete">
+                <form asp-action="Delete" method="post">
+                    <table>
+                        <h1>Delete</h1>
+                        <input style="visibility: hidden;" name="ogrno" id="ogrnoSil" type="text" placeholder="Öğrenci No" />
+                        </br>
+                        <input name="ad" id="adSil" type="text" placeholder="Ad" />
+                        <br />
+                        <input name="soyad" id="soyadSil" type="text" placeholder="Soyad" />
+                        <br />
+                        <!--
+                        <select id="MovieType" name="MovieType">
+                        @foreach (var item in Model)
+                        {
+                                                <option value="">@Html.Label(item.ogrno.ToString())</option>
+                        }
+                        </select>
+                        -->
+                        <input type="submit" value="Delete" />
+                    </table>
+                </form>
+            </table>
+        </div>
+
+    </div>
+
+    <div class="column" style="width:20%">
+    </div>
+
+</div>
+
+
+</div>
+<script>
+
+    function EditFunc(model) {
+        //var model = @Html.Raw(Json.Serialize(Model));
+        console.log(model);
+        document.getElementById("ogrno").value = model.ogrno;
+        document.getElementById("ad").value = model.ad;
+        document.getElementById("soyad").value = model.soyad;
+        document.getElementById("dtarih").value = model.dtarih;
+        document.getElementById("cinsiyet").value = model.cinsiyet;
+        document.getElementById("sinif").value = model.sinif;
+        document.getElementById("puan").value = model.puan;
+
+        //if(model.ogrno != 1){
+        //    ShowAlert(model.ogrno);
+        //}
+    }
+    function DeleteFunc(model) {
+        //var model = @Html.Raw(Json.Serialize(Model));
+        //console.log(model);
+        //console.log(ogrenciNo);
+        console.log(model);
+        document.getElementById("adSil").value = model.ad;
+        document.getElementById("soyadSil").value = model.soyad;
+        document.getElementById("ogrnoSil").value = model.ogrno;
+    }
+    function ShowAlert(ogrno) {
+        let text = "Press a button!\nEither OK or Cancel.";
+        if (confirm(text) == true) {
+            text = "You pressed OK!";
+        } else {
+            text = "You canceled!";
+        }
+    }
+</script>
