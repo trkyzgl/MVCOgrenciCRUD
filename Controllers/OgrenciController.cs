@@ -4,7 +4,6 @@ using MVCProjem.Data;
 using MVCProjem.Models;
 using System.Data;
 using System.Data.SqlClient;
-
 namespace MVCProjem.Controllers
 {
     public class OgrenciController : Controller
@@ -26,9 +25,10 @@ namespace MVCProjem.Controllers
             List<OgrenciModel> ogrenciModels = _dbcontext.Ogrenciler.Take(5).ToList();
             var lastFiveEntities = _dbcontext.Ogrenciler
             .OrderByDescending(e => e.ogrno) // Varsayılan olarak Id'ye göre sıralama, değiştirilebilir
-            .Take(5)
+            //.Take(5)  // kaç tane ğrencinin çekileceğini...
             .ToList();
-            ogrenciModels = lastFiveEntities;
+
+            ogrenciModels = lastFiveEntities;    
             /*
             string connectionString = _configuration.GetConnectionString("DefaultConnection");
             SqlConnection sqlConnection = new SqlConnection(connectionString);

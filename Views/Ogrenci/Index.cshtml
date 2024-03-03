@@ -9,7 +9,6 @@
     ViewData["Title"] = "Ogrenciler";
     //var gelen = (ViewData["say"]);
     //var text = ViewData["Ad"];
-
 }
 <!--
 <div class="text-center">
@@ -79,7 +78,32 @@
 
     <div class="column" style="width:30%">
         <!-- <p>@ViewData["Title"]</p>-->
+
+        <table id="ogrenciDelete">
+            <form asp-action="Delete" method="post">
+                <table>
+                    <h1>Delete</h1>
+                    <input style="visibility: hidden;" name="ogrno" id="ogrnoSil" type="text" placeholder="Öğrenci No" />
+                    </br>
+                    <input name="ad" id="adSil" type="text" placeholder="Ad" />
+                    <br />
+                    <input name="soyad" id="soyadSil" type="text" placeholder="Soyad" />
+                    <br />
+                    <!--
+                    <select id="MovieType" name="MovieType">
+                    @foreach (var item in Model)
+                    {
+                                  <option value="">@Html.Label(item.ogrno.ToString())</option>
+                    }
+                    </select>
+                    -->
+                    <input type="submit" value="Delete" />
+                </table>
+            </form>
+        </table>
+
         <h1>Arama</h1>
+
         <table id="ogrenciArama">
             <form asp-action="Search" method="post">
                 <table>
@@ -99,28 +123,7 @@
         <div>
             <!-- <p>@ViewData["Title"]</p>-->
 
-            <table id="ogrenciDelete">
-                <form asp-action="Delete" method="post">
-                    <table>
-                        <h1>Delete</h1>
-                        <input style="visibility: hidden;" name="ogrno" id="ogrnoSil" type="text" placeholder="Öğrenci No" />
-                        </br>
-                        <input name="ad" id="adSil" type="text" placeholder="Ad" />
-                        <br />
-                        <input name="soyad" id="soyadSil" type="text" placeholder="Soyad" />
-                        <br />
-                        <!--
-                        <select id="MovieType" name="MovieType">
-                        @foreach (var item in Model)
-                        {
-                                  <option value="">@Html.Label(item.ogrno.ToString())</option>
-                        }
-                        </select>
-                        -->
-                        <input type="submit" value="Delete" />
-                    </table>
-                </form>
-            </table>
+
         </div>
     </div>
     <div class="column" style="width:35%">
