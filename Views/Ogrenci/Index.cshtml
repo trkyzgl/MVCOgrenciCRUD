@@ -24,7 +24,7 @@
 }
 <div class="row">
 
-    <div class="column" style="width:20%">
+    <div class="column" style="width:30%">
         <h1> <u>Ekleme</u> </h1>
         <form asp-action="Create" method="post">
             <table>
@@ -46,7 +46,7 @@
         </form>
     </div>
 
-    <div class="column" style="width:20%">
+    <div class="column" style="width:30%">
         <h1>Güncelleme</h1>
         <form asp-action="Update" method="post">
             <table>
@@ -68,7 +68,7 @@
                 <select id="MovieType" name="MovieType">
                 @foreach (var item in Model)
                 {
-                       <option value="">@Html.Label(item.ogrno.ToString())</option>
+                   <option value="">@Html.Label(item.ogrno.ToString())</option>
                 }
                 </select>
                 -->
@@ -77,6 +77,52 @@
         </form>
     </div>
 
+    <div class="column" style="width:30%">
+        <!-- <p>@ViewData["Title"]</p>-->
+        <h1>Arama</h1>
+        <table id="ogrenciArama">
+            <form asp-action="Search" method="post">
+                <table>
+                    <input name="ad" id="adAra" type="text" placeholder="Öğrenci Ara" />
+                    <input type="submit" value="Ara" />
+                </table>
+            </form>
+        </table>
+        <div>
+            @if (Convert.ToInt32(@TempData["say"]) > 0)
+            {
+                <h6>aranılan özellikte @TempData["say"] adet veri var </h6>
+                //@TempData["say"]
+            }
+        </div>
+        <br />
+        <div>
+            <!-- <p>@ViewData["Title"]</p>-->
+
+            <table id="ogrenciDelete">
+                <form asp-action="Delete" method="post">
+                    <table>
+                        <h1>Delete</h1>
+                        <input style="visibility: hidden;" name="ogrno" id="ogrnoSil" type="text" placeholder="Öğrenci No" />
+                        </br>
+                        <input name="ad" id="adSil" type="text" placeholder="Ad" />
+                        <br />
+                        <input name="soyad" id="soyadSil" type="text" placeholder="Soyad" />
+                        <br />
+                        <!--
+                        <select id="MovieType" name="MovieType">
+                        @foreach (var item in Model)
+                        {
+                                  <option value="">@Html.Label(item.ogrno.ToString())</option>
+                        }
+                        </select>
+                        -->
+                        <input type="submit" value="Delete" />
+                    </table>
+                </form>
+            </table>
+        </div>
+    </div>
     <div class="column" style="width:35%">
         <h1>Öğrenciler</h1>
         <!-- <p>@ViewData["Title"]</p>-->
@@ -101,62 +147,12 @@
             }
         </table>
     </div>
-
-    <div class="column" style="width:25%">
-        <!-- <p>@ViewData["Title"]</p>-->
-        <h1>Arama</h1>
-        <table id="ogrenciArama">
-            <form asp-action="Search" method="post">
-                <table>
-                    <input name="ad" id="adAra" type="text" placeholder="Öğrenci Ara" />
-                    <input type="submit" value="Ara" />
-                </table>
-            </form>
-        </table>
-        <div>
-            @if (Convert.ToInt32(@TempData["say"]) > 0)
-            {
-                <h6>aranılan özellikte @TempData["say"] adet veri var </h6>
-                //@TempData["say"]
-            }
-
-        </div>
-        <br /><br /><br />
-        <div>
-            <!-- <p>@ViewData["Title"]</p>-->
-
-            <table id="ogrenciDelete">
-                <form asp-action="Delete" method="post">
-                    <table>
-                        <h1>Delete</h1>
-                        <input style="visibility: hidden;" name="ogrno" id="ogrnoSil" type="text" placeholder="Öğrenci No" />
-                        </br>
-                        <input name="ad" id="adSil" type="text" placeholder="Ad" />
-                        <br />
-                        <input name="soyad" id="soyadSil" type="text" placeholder="Soyad" />
-                        <br />
-                        <!--
-                        <select id="MovieType" name="MovieType">
-                        @foreach (var item in Model)
-                        {
-                                      <option value="">@Html.Label(item.ogrno.ToString())</option>
-                        }
-                        </select>
-                        -->
-                        <input type="submit" value="Delete" />
-                    </table>
-                </form>
-            </table>
-        </div>
-    </div>
-
     <div class="column" style="width:20%">
     </div>
 </div>
 
 </div>
 <script>
-
     function EditFunc(model) {
         //var model = @Html.Raw(Json.Serialize(Model));
         console.log(model);
@@ -167,7 +163,6 @@
         document.getElementById("cinsiyet").value = model.cinsiyet;
         document.getElementById("sinif").value = model.sinif;
         document.getElementById("puan").value = model.puan;
-
         //if(model.ogrno != 1){
         //    ShowAlert(model.ogrno);
         //}
