@@ -4,6 +4,7 @@ using MVCProjem.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MVCProjem.Migrations
 {
     [DbContext(typeof(MVCProjemContext))]
-    partial class MVCProjemContextModelSnapshot : ModelSnapshot
+    [Migration("20240305192438_mig6")]
+    partial class mig6
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -30,23 +32,12 @@ namespace MVCProjem.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("kitapno"), 1L, 1);
 
-                    b.Property<string>("VerilisTarihi")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("ad")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("ogrno")
+                    b.Property<int>("turno")
                         .HasColumnType("int");
-
-                    b.Property<string>("turno")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("verildimi")
-                        .HasColumnType("bit");
 
                     b.Property<int>("yazarno")
                         .HasColumnType("int");

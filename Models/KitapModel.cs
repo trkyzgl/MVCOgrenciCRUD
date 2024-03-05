@@ -9,9 +9,11 @@ namespace MVCProjem.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int kitapno { get; set; }
         public string ad { get; set; }
-        public int sayfasayisi { get; set; }
-        public int puan { get; set; }
         public int yazarno { get; set; }
-        public int turno { get; set; }
+        public string turno { get; set; }
+        public  bool verildimi { get; set; }
+        public int ogrno { get; set; }
+        public string VerilisTarihi { get; set; }
+
     }
 }

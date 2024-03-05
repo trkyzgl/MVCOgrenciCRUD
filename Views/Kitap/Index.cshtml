@@ -1,11 +1,79 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-}
+﻿@using Newtonsoft.Json;
+@model List<MVCProjem.Models.KitapModel>
+@TempData["Veri"]
 
-<div style="text-align:center">
-    <h3 >Merhabalar Kitap sayfasına hoşgeldiniz.</h3>
+
+
+
+@{
+    ViewData["Title"] = "Kitaplar";
+    //var gelen = (ViewData["say"]);
+    //var text = ViewData["Ad"];
+}
+<!--
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+</div>
+-->
+@using (Html.BeginForm("Kitaplar", "Controller"))
+{
+    <!--<input type="search" name = "keyword" placeholder = "aranacak ürün..." />
+    <button type="submit"> Ara </button>-->
+}
+<div class="row">
+    <div class="column" style="width:30%">
+        <h1><u>Ekleme</u> </h1>
+        <form asp-action="Create" method="post">
+            <table>
+                </br>
+                <input name="KitapAd" id="ad" type="text" placeholder="Kitap Adı" required="" />
+                <br />
+
+                <input name="Yazar" id="Yazar" type="text" placeholder="Yazar Adı" required="" />
+                <br/>
+                <!--
+                <input name="dtarih" id="dtarihAdd" type="text" placeholder="Doğum Tarihi: 01.01.1900" required="" />
+                <br />
+                <input name="cinsiyet" id="cinsiyetAdd" type="text" placeholder="Cinsiyet" required="" />
+                <br />
+                <input name="sinif" id="sinifAdd" type="text" placeholder="Sınıf" required="" />
+                <br />
+                <input name="puan" id="puanAdd" type="text" placeholder="Puan" required="" />
+                -->
+                </br>
+                <input type="submit" value="Ekle" />
+            </table>
+        </form>
+
+    </div>
 </div>
 
+<script>
+    function EditFunc(model) {
+        //var model = @Html.Raw(Json.Serialize(Model));
+        console.log(model);
+        document.getElementById("ogrno").value = model.ogrno;
 
+        //if(model.ogrno != 1){
+        //    ShowAlert(model.ogrno);
+        //}
+    }
+    function DeleteFunc(model) {
+        //var model = @Html.Raw(Json.Serialize(Model));
+        //console.log(model);
+        //console.log(kitapNo);
+        console.log(model);
+        document.getElementById("adSil").value = model.ad;
+        document.getElementById("soyadSil").value = model.soyad;
+        document.getElementById("ogrnoSil").value = model.ogrno;
+    }
+    function ShowAlert(ogrno) {
+        let text = "Press a button!\nEither OK or Cancel.";
+        if (confirm(text) == true) {
+            text = "You pressed OK!";
+        } else {
+            text = "You canceled!";
+        }
+    }
+</script>
