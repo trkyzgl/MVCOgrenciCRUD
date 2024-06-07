@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MVCProjem.Migrations
 {
     [DbContext(typeof(MVCProjemContext))]
-    [Migration("20230608225032_Mig5")]
-    partial class Mig5
+    [Migration("20240607002647_mig1")]
+    partial class mig1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -32,18 +32,23 @@ namespace MVCProjem.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("kitapno"), 1L, 1);
 
+                    b.Property<string>("VerilisTarihi")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("ad")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("puan")
+                    b.Property<int>("ogrno")
                         .HasColumnType("int");
 
-                    b.Property<int>("sayfasayisi")
-                        .HasColumnType("int");
+                    b.Property<string>("turno")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("turno")
-                        .HasColumnType("int");
+                    b.Property<bool>("verildimi")
+                        .HasColumnType("bit");
 
                     b.Property<int>("yazarno")
                         .HasColumnType("int");

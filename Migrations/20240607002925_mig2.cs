@@ -4,7 +4,7 @@
 
 namespace MVCProjem.Migrations
 {
-    public partial class mig3 : Migration
+    public partial class mig2 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
