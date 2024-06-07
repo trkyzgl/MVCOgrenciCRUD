@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.CodeAnalysis;
 using Microsoft.EntityFrameworkCore;
 using MVCProjem.Data;
 using MVCProjem.Models;
@@ -75,7 +76,7 @@ namespace MVCProjem.Controllers
         int count;
         public IActionResult Search(Ogrenci ogrenciModel)
         {
-            List<Ogrenci> list = _dbcontext.Ogrenciler.Where(x => (x.ad + " " + x.soyad).Contains(ogrenciModel.ad)).ToList();
+            List<Ogrenci> list = _dbcontext.Ogrenciler.Where(x => (x.Name + " " + x.Surname).Contains(ogrenciModel.Name)).ToList();
             count = list.Count();
             /*
             ViewData["say"] = count;
@@ -88,9 +89,12 @@ namespace MVCProjem.Controllers
 
             return RedirectToAction("Index", "Ogrenci");
         }
-        public IActionResult Delete(Ogrenci ogrenciModel)
+        public IActionResult Remove(int id)
         {
-            _dbcontext.Ogrenciler.Remove(ogrenciModel);
+
+            var ogrenci = _dbcontext.Ogrenciler.FirstOrDefault(p => p.Id == id);
+
+            _dbcontext.Ogrenciler.Remove(ogrenci);
             _dbcontext.SaveChanges();
             //string connectionString = _configuration.GetConnectionString("DefaultConnection");
             //SqlConnection sql = new SqlConnection(connectionString);
@@ -101,6 +105,16 @@ namespace MVCProjem.Controllers
             //sql.Close();
             return RedirectToAction("Index", "Ogrenci");//return View();
         }
+
+
+        public IActionResult Update(int id)
+        {
+
+            //var ogrenci = _dbcontext.Ogrenciler.Where(q => q.Id.Contains(ogrenciler.Id)).Take(1);
+            var ogrenci = _dbcontext.Ogrenciler.FirstOrDefault(p => p.Id == id);
+
+            return View(); //Ogrenciler();
+        }
         [HttpPost]
         public IActionResult Update(Ogrenci ogrenciModel)
         {
@@ -108,13 +122,13 @@ namespace MVCProjem.Controllers
             var ogrenci = _dbcontext.Ogrenciler.AsNoTracking().FirstOrDefault(q => q.Id == ogrenciModel.Id);
             if (ogrenci != null)
             {
-                ogrenci.ad = ogrenciModel.ad;
-                ogrenci.soyad = ogrenciModel.soyad;
+                ogrenci.Name = ogrenciModel.Name;
+                ogrenci.Surname = ogrenciModel.Surname;
             }
             _dbcontext.Ogrenciler.Update(ogrenci);
             _dbcontext.SaveChanges();
 
-            var temp = _dbcontext.Ogrenciler.Where(q => q.ad.Contains(ogrenciModel.ad)).Take(10).ToList();
+            var temp = _dbcontext.Ogrenciler.Where(q => q.Name.Contains(ogrenciModel.Name)).Take(10).ToList();
             #region
             //if (ogrenciModel.ogrno == null || string.IsNullOrEmpty(ogrenciModel.ad) || string.IsNullOrEmpty(ogrenciModel.soyad))
             //{
@@ -132,8 +146,14 @@ namespace MVCProjem.Controllers
             ////SqlDataAdapter adptr = new SqlDataAdapter(sorgum, sql);
             //sql.Close();
             #endregion
-            return RedirectToAction("Index", "Ogrenci");//Ogrenciler();
+
+            return RedirectToAction("Index", "Ogrenci");
+            //return View(); //Ogrenciler();   // revize edilecek
         }
+
+
+
+
 
 
     }

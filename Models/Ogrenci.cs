@@ -9,8 +9,8 @@ namespace MVCProjem.Models
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
-        public string ad { get; set; }
-        public string soyad { get; set; }
+        public string Name { get; set; }
+        public string Surname { get; set; }
 
     }
 }

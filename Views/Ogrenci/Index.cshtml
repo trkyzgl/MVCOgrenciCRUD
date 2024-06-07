@@ -6,7 +6,7 @@
 
 
 @{
-    ViewData["Title"] = "Kitaplar";
+    ViewData["Title"] = "Ogrenciler";
     //var gelen = (ViewData["say"]);
     //var text = ViewData["Ad"];
 }
@@ -30,40 +30,23 @@
             <th>Ad</th>
             <th>Soyad</th>
             <th>Action</th>
-
         </tr>
-
     </thead>
-
-
     <tbody>
-
         @foreach (var item in Model)
         {
             <tr>
                 <td>@item.Id</td>
-                <td>@item.ad</td>
-                <td>@item.soyad</td>
+                <td>@item.Name</td>
+                <td>@item.Surname</td>
                 <td>
-                    <a class="btn btn-warning" asp-controller="Products" asp-action="Update" asp-route-id="@item.Id">Update</a>
-                    <a class="btn btn-danger" asp-controller="Products" asp-action="Remove" asp-route-id="@item.Id">Delete</a>
+                    <a class="btn btn-warning" asp-controller="Ogrenci" asp-action="Update" asp-route-id="@item.Id">Update</a>
+                    <a class="btn btn-danger" asp-controller="Ogrenci" asp-action="Remove" asp-route-id="@item.Id">Delete</a>
                 </td>
-
-
             </tr>
-
-
         }
-
     </tbody>
-
-
-
-
 </table>
-
-
-
 
 <div class="row">
 
@@ -72,64 +55,21 @@
         <form asp-action="Create" method="post">
             <table>
                 </br>
-                <input name="ad" id="adAdd" type="text" placeholder="Ad" required="" />
+                <input name="Name" id="adAdd" type="text" placeholder="Ad" required="" />
                 <br />
-                <input name="soyad" id="soyadAdd" type="text" placeholder="Soyad" required="" />
+                <input name="Surname" id="soyadAdd" type="text" placeholder="Soyad" required="" />
                 </br>
                 <input type="submit" value="Ekle" />
             </table>
         </form>
     </div>
 
-    <div class="column" style="width:30%">
-        <h1>Güncelleme</h1>
-        <form asp-action="Update" method="post">
-            <table>
-                <input style="display:none ;  visibility: hidden;" name="ogrno" id="ogrno" type="text" placeholder="Öğrenci No" />
-                </br><!---->
-                <input name="ad" id="ad" type="text" placeholder="Ad" />
-                <br />
-                <input name="soyad" id="soyad" type="text" placeholder="Soyad" />
 
-                <br />
-                <!--
-                <select id="MovieType" name="MovieType">
-                @foreach (var item in Model)
-                {
-                   <option value="">@Html.Label(item.Id.ToString())</option>
-                }
-                </select>
-                -->
-                <input type="submit" value="Guncelle" />
-            </table>
-        </form>
-    </div>
 
     <div class="column" style="width:30%">
         <!-- <p>@ViewData["Title"]</p>-->
 
-        <table id="ogrenciDelete">
-            <form asp-action="Delete" method="post">
-                <table>
-                    <h1>Delete</h1>
-                    <input style="visibility: hidden;" name="ogrno" id="ogrnoSil" type="text" placeholder="Öğrenci No" />
-                    </br>
-                    <input name="ad" id="adSil" type="text" placeholder="Ad" />
-                    <br />
-                    <input name="soyad" id="soyadSil" type="text" placeholder="Soyad" />
-                    <br />
-                    <!--
-                    <select id="MovieType" name="MovieType">
-                    @foreach (var item in Model)
-                    {
-                                  <option value="">@Html.Label(item.Id.ToString())</option>
-                    }
-                    </select>
-                    -->
-                    <input type="submit" value="Delete" />
-                </table>
-            </form>
-        </table>
+
 
         <h1>Arama</h1>
 
@@ -155,31 +95,7 @@
 
         </div>
     </div>
-    <div class="column" style="width:35%">
-        <h1>Öğrenciler</h1>
-        <!-- <p>@ViewData["Title"]</p>-->
-        <table id="ogrenciList">
-            <tr>
-                <th>ad</th>
-                <th>soyad</th>
-                <th>no</th>
-                <th>Snf</th>
-                <th>Seç</th>
-            </tr>
-            @foreach (var item in Model)
-            {
-                <tr>
-                    <td>@Html.Label( item.ad) </td>
-                    <td>@Html.Label( item.soyad)</td>
-                    <td>@Html.Label( item.Id.ToString())</td>
-                    <td><button type="button" onclick="EditFunc(@Json.Serialize(item).ToString())">Edit</button></td>
-                    <td><button type="button" onclick="DeleteFunc(@Json.Serialize(item).ToString())">Delete</button></td>
-                </tr>
-            }
-        </table>
-    </div>
-    <div class="column" style="width:20%">
-    </div>
+
 </div>
 
 </div>
@@ -187,9 +103,9 @@
     function EditFunc(model) {
         //var model = @Html.Raw(Json.Serialize(Model));
         console.log(model);
-        document.getElementById("ogrno").value = model.ogrno;
-        document.getElementById("ad").value = model.ad;
-        document.getElementById("soyad").value = model.soyad;
+        document.getElementById("ogrno").value = model.Id;
+        document.getElementById("ad").value = model.Name;
+        document.getElementById("soyad").value = model.surname;
         //if(model.ogrno != 1){
         //    ShowAlert(model.ogrno);
         //}

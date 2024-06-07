@@ -1,0 +1,34 @@
+﻿@{
+    ViewData["Title"] = "Update";
+}
+@model Ogrenci
+
+<h1>Update Ogrenci</h1>
+
+<div class=col-md-6>
+    <form asp-action="Update" method="post" asp-controller="Ogrenci">
+        <input type="hidden" asp-for="Id" />
+        <div class="form-group">
+            <label asp-for="Name"></label>
+            <input asp-for="Name" class="form-control" />
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Surname"></label>
+            <input asp-for="Surname" class="form-control" />
+            <span asp-validation-for="Surname" class="text-danger"></span>
+        </div>
+
+
+        <div class="form-group" type="hidden">
+            <label ></label>
+            <select asp-items="ViewBag.categories" class="form-control"></select>
+        </div>
+
+
+        <div class="form-group">
+            <input type="submit" value="Update" class="btn-primary" />
+        </div>
+    </form>
+</div>
+

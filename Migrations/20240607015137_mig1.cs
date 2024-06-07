@@ -9,17 +9,27 @@ namespace MVCOgrenciCRUD.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.RenameColumn(
-                name: "ogrno",
+                name: "soyad",
                 table: "Ogrenciler",
-                newName: "Id");
+                newName: "Surname");
+
+            migrationBuilder.RenameColumn(
+                name: "ad",
+                table: "Ogrenciler",
+                newName: "Name");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.RenameColumn(
-                name: "Id",
+                name: "Surname",
                 table: "Ogrenciler",
-                newName: "ogrno");
+                newName: "soyad");
+
+            migrationBuilder.RenameColumn(
+                name: "Name",
+                table: "Ogrenciler",
+                newName: "ad");
         }
     }
 }

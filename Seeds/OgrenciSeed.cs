@@ -12,11 +12,11 @@ namespace NLayer.Repository.Seeds
         {
 
             builder.HasData(
-                new Ogrenci { Id = 1, ad = "Ahmet", soyad = "test" },
+                new Ogrenci { Id = 1, Name = "Ahmet", Surname = "test" },
 
-                new Ogrenci {Id = 1, ad = "Mehmet", soyad = "test" },
+                new Ogrenci {Id = 1, Name = "Mehmet", Surname = "test" },
 
-                new Ogrenci {Id = 1, ad = "Ali", soyad = "test" }
+                new Ogrenci {Id = 1, Name = "Ali", Surname = "test" }
                 );
             //throw new NotImplementedException();
 

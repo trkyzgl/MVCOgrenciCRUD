@@ -38,16 +38,22 @@ namespace MVCProjem.Controllers
         public IActionResult Update(Ogrenci ogrenciModel)
         {
 
+
+
             var ogrenci = _dbcontext.Ogrenciler.AsNoTracking().FirstOrDefault(q => q.Id == ogrenciModel.Id);
+
             if (ogrenci != null)
             {
-                ogrenci.ad = ogrenciModel.ad;
-                ogrenci.soyad = ogrenciModel.soyad;
+
+                _dbcontext.Ogrenciler.Update(ogrenci);
+                //ogrenci.Name = ogrenciModel.Name;
+                //ogrenci.Surname = ogrenciModel.Surname;  // Bulunmam durumu 
             }
             _dbcontext.Ogrenciler.Update(ogrenci);
             _dbcontext.SaveChanges();
 
-            var temp = _dbcontext.Ogrenciler.Where(q => q.ad.Contains(ogrenciModel.ad)).Take(10).ToList();
+            //var temp = _dbcontext.Ogrenciler.Where(q => q.Name.Contains(ogrenciModel.Name)).Take(10).ToList();
+
 
             //if (ogrenciModel.ogrno == null || string.IsNullOrEmpty(ogrenciModel.ad) || string.IsNullOrEmpty(ogrenciModel.soyad))
             //{
@@ -162,7 +168,7 @@ namespace MVCProjem.Controllers
         int count;
         public IActionResult Search(Ogrenci ogrenciModel)
         {
-            List<Ogrenci> list = _dbcontext.Ogrenciler.Where(x => (x.ad+ " "+x.soyad).Contains(ogrenciModel.ad)).ToList();
+            List<Ogrenci> list = _dbcontext.Ogrenciler.Where(x => (x.Name+ " "+x.Surname).Contains(ogrenciModel.Name)).ToList();
             count = list.Count();
             //ViewData["say"] = count;
             //ViewBag.FirstName = "Yusuf";
