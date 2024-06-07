@@ -15,11 +15,8 @@ namespace MVCProjem.Controllers
         {
             this._dbcontext = config;
         }
-
         public IActionResult Index()
         {
-
-
             //string connectString = _dbcontext.GetConnectionString("DefaultConnection");
             //SqlConnection sql = new SqlConnection(connectString);
             //sql.Open();
@@ -38,18 +35,14 @@ namespace MVCProjem.Controllers
         }
 
         [HttpPost]
-        public IActionResult Update(OgrenciModel ogrenciModel)
+        public IActionResult Update(Ogrenci ogrenciModel)
         {
 
-            var ogrenci = _dbcontext.Ogrenciler.AsNoTracking().FirstOrDefault(q => q.ogrno == ogrenciModel.ogrno);
+            var ogrenci = _dbcontext.Ogrenciler.AsNoTracking().FirstOrDefault(q => q.Id == ogrenciModel.Id);
             if (ogrenci != null)
             {
                 ogrenci.ad = ogrenciModel.ad;
                 ogrenci.soyad = ogrenciModel.soyad;
-                ogrenci.dtarih = ogrenciModel.dtarih;
-                ogrenci.cinsiyet = ogrenciModel.cinsiyet;
-                ogrenci.sinif = ogrenciModel.sinif;
-                ogrenci.puan = ogrenciModel.puan;
             }
             _dbcontext.Ogrenciler.Update(ogrenci);
             _dbcontext.SaveChanges();
@@ -83,7 +76,7 @@ namespace MVCProjem.Controllers
         {
 
             // öğrenci listesinden 5 öğrenci çekelim
-            List<OgrenciModel> ogrenciModels = _dbcontext.Ogrenciler.Take(5).ToList();
+            List<Ogrenci> ogrenciModels = _dbcontext.Ogrenciler.Take(5).ToList();
             //return View(objList);
             /*
             string connectString = _configuration.GetConnectionString("DefaultConnection");
@@ -122,7 +115,7 @@ namespace MVCProjem.Controllers
         }
 
         /*Bu alan silme işlemi yapar*/
-        public IActionResult Delete(OgrenciModel ogrenciModel)
+        public IActionResult Delete(Ogrenci ogrenciModel)
         {
             _dbcontext.Ogrenciler.Remove(ogrenciModel);
             _dbcontext.SaveChanges();
@@ -137,7 +130,7 @@ namespace MVCProjem.Controllers
             return RedirectToAction("Ogrenciler", "Home");//return View();
         }
         
-        public IActionResult Create(OgrenciModel ogrenciModel)
+        public IActionResult Create(Ogrenci ogrenciModel)
         {
 
             _dbcontext.Ogrenciler.Add(ogrenciModel);
@@ -167,9 +160,9 @@ namespace MVCProjem.Controllers
         }
 
         int count;
-        public IActionResult Search(OgrenciModel ogrenciModel)
+        public IActionResult Search(Ogrenci ogrenciModel)
         {
-            List<OgrenciModel> list = _dbcontext.Ogrenciler.Where(x => (x.ad+ " "+x.soyad).Contains(ogrenciModel.ad)).ToList();
+            List<Ogrenci> list = _dbcontext.Ogrenciler.Where(x => (x.ad+ " "+x.soyad).Contains(ogrenciModel.ad)).ToList();
             count = list.Count();
             //ViewData["say"] = count;
             //ViewBag.FirstName = "Yusuf";

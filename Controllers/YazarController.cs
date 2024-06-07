@@ -19,24 +19,24 @@ namespace MVCProjem.Controllers
 
         public IActionResult Index()
         {
-            List<YazarModel> list = _dbcontext.Yazarlar.OrderByDescending(q=>q.yazarno).ToList();
+            List<Yazar> list = _dbcontext.Yazarlar.OrderByDescending(q=>q.yazarno).ToList();
             ViewData["Ad"] = "Gençay Yıldız";
             TempData["Ad"] = "Gençay Yıldız";
             return View(list);//Ogrenciler();
         }
 
-        public IActionResult Create(YazarModel yazarModel)
+        public IActionResult Create(Yazar yazarModel)
         {
             _dbcontext.Yazarlar.Add(yazarModel);
             _dbcontext.SaveChanges();
             return RedirectToAction("Index", "Yazar");//Ogrenciler();
         }
-        public IActionResult Yazar(YazarModel yazarModel)
+        public IActionResult Yazar(Yazar yazarModel)
         {
-            List<YazarModel> list = _dbcontext.Yazarlar.ToList();
+            List<Yazar> list = _dbcontext.Yazarlar.ToList();
             return View(list);//Ogrenciler();
         }
-        public IActionResult Delete(YazarModel yazarModel)
+        public IActionResult Delete(Yazar yazarModel)
         {
             _dbcontext.Yazarlar.Remove(yazarModel);
             _dbcontext.SaveChanges();

@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace MVCProjem.Models
 {
-    public class YazarModel
+    public class Yazar
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]

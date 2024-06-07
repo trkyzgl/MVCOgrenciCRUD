@@ -1,5 +1,5 @@
 ﻿@using Newtonsoft.Json;
-@model List<MVCProjem.Models.OgrenciModel>
+@model List<MVCProjem.Models.Ogrenci>
 @TempData["Veri"]
 
 
@@ -21,6 +21,50 @@
     <!--<input type="search" name = "keyword" placeholder = "aranacak ürün..." />
     <button type="submit"> Ara </button>-->
 }
+
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>No</th>
+            <th>Ad</th>
+            <th>Soyad</th>
+            <th>Action</th>
+
+        </tr>
+
+    </thead>
+
+
+    <tbody>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Id</td>
+                <td>@item.ad</td>
+                <td>@item.soyad</td>
+                <td>
+                    <a class="btn btn-warning" asp-controller="Products" asp-action="Update" asp-route-id="@item.Id">Update</a>
+                    <a class="btn btn-danger" asp-controller="Products" asp-action="Remove" asp-route-id="@item.Id">Delete</a>
+                </td>
+
+
+            </tr>
+
+
+        }
+
+    </tbody>
+
+
+
+
+</table>
+
+
+
+
 <div class="row">
 
     <div class="column" style="width:30%">
@@ -31,14 +75,6 @@
                 <input name="ad" id="adAdd" type="text" placeholder="Ad" required="" />
                 <br />
                 <input name="soyad" id="soyadAdd" type="text" placeholder="Soyad" required="" />
-                <br />
-                <input name="dtarih" id="dtarihAdd" type="text" placeholder="Doğum Tarihi: 01.01.1900" required="" />
-                <br />
-                <input name="cinsiyet" id="cinsiyetAdd" type="text" placeholder="Cinsiyet" required="" />
-                <br />
-                <input name="sinif" id="sinifAdd" type="text" placeholder="Sınıf" required="" />
-                <br />
-                <input name="puan" id="puanAdd" type="text" placeholder="Puan" required="" />
                 </br>
                 <input type="submit" value="Ekle" />
             </table>
@@ -54,20 +90,13 @@
                 <input name="ad" id="ad" type="text" placeholder="Ad" />
                 <br />
                 <input name="soyad" id="soyad" type="text" placeholder="Soyad" />
-                <br />
-                <input name="dtarih" id="dtarih" type="text" placeholder="Doğum Tarihi:01.01.1990" />
-                <br />
-                <input name="cinsiyet" id="cinsiyet" type="text" placeholder="Cinsiyet" />
-                <br />
-                <input name="sinif" id="sinif" type="text" placeholder="Sınıf" />
-                <br />
-                <input name="puan" id="puan" type="text" placeholder="Puan" />
+
                 <br />
                 <!--
                 <select id="MovieType" name="MovieType">
                 @foreach (var item in Model)
                 {
-                   <option value="">@Html.Label(item.ogrno.ToString())</option>
+                   <option value="">@Html.Label(item.Id.ToString())</option>
                 }
                 </select>
                 -->
@@ -93,7 +122,7 @@
                     <select id="MovieType" name="MovieType">
                     @foreach (var item in Model)
                     {
-                                  <option value="">@Html.Label(item.ogrno.ToString())</option>
+                                  <option value="">@Html.Label(item.Id.ToString())</option>
                     }
                     </select>
                     -->
@@ -142,8 +171,7 @@
                 <tr>
                     <td>@Html.Label( item.ad) </td>
                     <td>@Html.Label( item.soyad)</td>
-                    <td>@Html.Label( item.ogrno.ToString())</td>
-                    <td>@Html.Label( item.sinif)</td>
+                    <td>@Html.Label( item.Id.ToString())</td>
                     <td><button type="button" onclick="EditFunc(@Json.Serialize(item).ToString())">Edit</button></td>
                     <td><button type="button" onclick="DeleteFunc(@Json.Serialize(item).ToString())">Delete</button></td>
                 </tr>
@@ -162,10 +190,6 @@
         document.getElementById("ogrno").value = model.ogrno;
         document.getElementById("ad").value = model.ad;
         document.getElementById("soyad").value = model.soyad;
-        document.getElementById("dtarih").value = model.dtarih;
-        document.getElementById("cinsiyet").value = model.cinsiyet;
-        document.getElementById("sinif").value = model.sinif;
-        document.getElementById("puan").value = model.puan;
         //if(model.ogrno != 1){
         //    ShowAlert(model.ogrno);
         //}

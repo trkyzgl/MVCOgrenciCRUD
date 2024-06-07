@@ -22,9 +22,9 @@ namespace MVCProjem.Controllers
         */
         public IActionResult Index()
         {
-            List<OgrenciModel> ogrenciModels = _dbcontext.Ogrenciler.Take(5).ToList();
+            List<Ogrenci> ogrenciModels = _dbcontext.Ogrenciler.Take(5).ToList();
             var lastFiveEntities = _dbcontext.Ogrenciler
-            .OrderByDescending(e => e.ogrno) // Varsayılan olarak Id'ye göre sıralama, değiştirilebilir
+            .OrderByDescending(e => e.Id) // Varsayılan olarak Id'ye göre sıralama, değiştirilebilir
             //.Take(5)  // kaç tane ğrencinin çekileceğini...
             .ToList();
 
@@ -51,7 +51,7 @@ namespace MVCProjem.Controllers
         {
             return View();
         }
-        public IActionResult Create(OgrenciModel ogrenciModel)
+        public IActionResult Create(Ogrenci ogrenciModel)
         {
             _dbcontext.Ogrenciler.Add(ogrenciModel);
             _dbcontext.SaveChanges();
@@ -73,9 +73,9 @@ namespace MVCProjem.Controllers
             return RedirectToAction("Index", "Ogrenci");//return View();
         }
         int count;
-        public IActionResult Search(OgrenciModel ogrenciModel)
+        public IActionResult Search(Ogrenci ogrenciModel)
         {
-            List<OgrenciModel> list = _dbcontext.Ogrenciler.Where(x => (x.ad + " " + x.soyad).Contains(ogrenciModel.ad)).ToList();
+            List<Ogrenci> list = _dbcontext.Ogrenciler.Where(x => (x.ad + " " + x.soyad).Contains(ogrenciModel.ad)).ToList();
             count = list.Count();
             /*
             ViewData["say"] = count;
@@ -88,7 +88,7 @@ namespace MVCProjem.Controllers
 
             return RedirectToAction("Index", "Ogrenci");
         }
-        public IActionResult Delete(OgrenciModel ogrenciModel)
+        public IActionResult Delete(Ogrenci ogrenciModel)
         {
             _dbcontext.Ogrenciler.Remove(ogrenciModel);
             _dbcontext.SaveChanges();
@@ -102,18 +102,14 @@ namespace MVCProjem.Controllers
             return RedirectToAction("Index", "Ogrenci");//return View();
         }
         [HttpPost]
-        public IActionResult Update(OgrenciModel ogrenciModel)
+        public IActionResult Update(Ogrenci ogrenciModel)
         {
 
-            var ogrenci = _dbcontext.Ogrenciler.AsNoTracking().FirstOrDefault(q => q.ogrno == ogrenciModel.ogrno);
+            var ogrenci = _dbcontext.Ogrenciler.AsNoTracking().FirstOrDefault(q => q.Id == ogrenciModel.Id);
             if (ogrenci != null)
             {
                 ogrenci.ad = ogrenciModel.ad;
                 ogrenci.soyad = ogrenciModel.soyad;
-                ogrenci.dtarih = ogrenciModel.dtarih;
-                ogrenci.cinsiyet = ogrenciModel.cinsiyet;
-                ogrenci.sinif = ogrenciModel.sinif;
-                ogrenci.puan = ogrenciModel.puan;
             }
             _dbcontext.Ogrenciler.Update(ogrenci);
             _dbcontext.SaveChanges();

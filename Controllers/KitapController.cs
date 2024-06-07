@@ -16,17 +16,17 @@ namespace MVCProjem.Controllers
             if (5>= _dbcontext.Kitaplar.Take(5).ToList().Count)
             {
 
-         
-            List<KitapModel> kitapModels = _dbcontext.Kitaplar.Take(5).ToList();
+            List<Kitap> kitapModels = _dbcontext.Kitaplar.Take(5).ToList();
             var lastFiveEntities = _dbcontext.Kitaplar
             .OrderByDescending(e => e.kitapno) // Varsayılan olarak Id'ye göre sıralama, değiştirilebilir
             //.Take(5)  // kaç tane ğrencinin çekileceğini...
             .ToList();
             kitapModels = lastFiveEntities;
             return View("Index", kitapModels);
-
             }
             return View("Index");   
         }
+
+
     }
 }

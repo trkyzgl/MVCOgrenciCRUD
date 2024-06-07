@@ -10,9 +10,9 @@ namespace MVCProjem.Data
 
         }
 
-        public DbSet<OgrenciModel> Ogrenciler { get; set; }
-        public DbSet<KitapModel> Kitaplar { get; set; }
-        public DbSet<YazarModel> Yazarlar { get; set; }
+        public DbSet<Ogrenci> Ogrenciler { get; set; }
+        public DbSet<Kitap> Kitaplar { get; set; }
+        public DbSet<Yazar> Yazarlar { get; set; }
 
     }
 }
