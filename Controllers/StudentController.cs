@@ -150,11 +150,5 @@ namespace MVCProjem.Controllers
             return RedirectToAction("Index", "Student");
             //return View(); //Students();   // revize edilecek
         }
-
-
-
-
-
-
     }
 }
