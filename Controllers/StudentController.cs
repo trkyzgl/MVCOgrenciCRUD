@@ -7,10 +7,10 @@ using System.Data;
 using System.Data.SqlClient;
 namespace MVCProjem.Controllers
 {
-    public class OgrenciController : Controller
+    public class StudentController : Controller
     {
-        private readonly MVCProjemContext _dbcontext;
-        public OgrenciController(MVCProjemContext config)
+        private readonly AppDbContext _dbcontext;
+        public StudentController(AppDbContext config)
         {
             this._dbcontext = config;
         }
@@ -23,18 +23,18 @@ namespace MVCProjem.Controllers
         */
         public IActionResult Index()
         {
-            List<Ogrenci> ogrenciModels = _dbcontext.Ogrenciler.Take(5).ToList();
-            var lastFiveEntities = _dbcontext.Ogrenciler
+            List<Student> studentModels = _dbcontext.Students.Take(5).ToList();
+            var lastFiveEntities = _dbcontext.Students
             .OrderByDescending(e => e.Id) // Varsayılan olarak Id'ye göre sıralama, değiştirilebilir
             //.Take(5)  // kaç tane ğrencinin çekileceğini...
             .ToList();
 
-            ogrenciModels = lastFiveEntities;    
+            studentModels = lastFiveEntities;    
             /*
             string connectionString = _configuration.GetConnectionString("DefaultConnection");
             SqlConnection sqlConnection = new SqlConnection(connectionString);
             sqlConnection.Open();
-            string sorgu = "select top 10 * from ogrenci";
+            string sorgu = "select top 10 * from student";
             SqlCommand command = new SqlCommand(sorgu, sqlConnection);
             command.ExecuteNonQuery();
             List<OgrenciModel> list = new List<OgrenciModel>();
@@ -46,37 +46,37 @@ namespace MVCProjem.Controllers
             sqlConnection.Close(); 
             return View();   
             */
-            return View("Index", ogrenciModels);
+            return View("Index", studentModels);
         }
         public IActionResult OgrenciList()
         {
             return View();
         }
-        public IActionResult Create(Ogrenci ogrenciModel)
+        public IActionResult Create(Student studentModel)
         {
-            _dbcontext.Ogrenciler.Add(ogrenciModel);
+            _dbcontext.Students.Add(studentModel);
             _dbcontext.SaveChanges();
             //klasik yöntem
-            //string t = Convert.ToDateTime(ogrenciModel.dtarih).ToString("dd.MM.yyyy");
+            //string t = Convert.ToDateTime(studentModel.dtarih).ToString("dd.MM.yyyy");
             //string connectionString = _configuration.GetConnectionString("DefaultConnection");
             //SqlConnection sql = new SqlConnection(connectionString);
             //sql.Open();
-            //string sorgu = "insert into  Ogrenciler(ad,soyad,dtarih,cinsiyet,sinif,puan) values(" +
-            //"'"+ogrenciModel.ad.ToString()+ "','" + ogrenciModel.soyad.ToString() + "' ,'" + ogrenciModel.dtarih+ "'  , '" + ogrenciModel.cinsiyet.ToString() + "', '" + ogrenciModel.sinif.ToString()+ 
-            //"'," +ogrenciModel.puan+")";
+            //string sorgu = "insert into  Students(ad,soyad,dtarih,cinsiyet,sinif,puan) values(" +
+            //"'"+studentModel.ad.ToString()+ "','" + studentModel.soyad.ToString() + "' ,'" + studentModel.dtarih+ "'  , '" + studentModel.cinsiyet.ToString() + "', '" + studentModel.sinif.ToString()+ 
+            //"'," +studentModel.puan+")";
             // SqlCommand cmd = new SqlCommand(sorgu,sql);
             // cmd.ExecuteNonQuery();
             // sql.Close();
             //SqlConnection sql = new SqlConnection();
-            //MVCProjemContext context = new MVCProjemContext();
-            //context.Ogrenciler.Add(ogrenciModel);
+            //AppDbContext context = new AppDbContext();
+            //context.Students.Add(studentModel);
             //context.SaveChanges();
-            return RedirectToAction("Index", "Ogrenci");//return View();
+            return RedirectToAction("Index", "Student");//return View();
         }
         int count;
-        public IActionResult Search(Ogrenci ogrenciModel)
+        public IActionResult Search(Student studentModel)
         {
-            List<Ogrenci> list = _dbcontext.Ogrenciler.Where(x => (x.Name + " " + x.Surname).Contains(ogrenciModel.Name)).ToList();
+            List<Student> list = _dbcontext.Students.Where(x => (x.Name + " " + x.Surname).Contains(studentModel.Name)).ToList();
             count = list.Count();
             /*
             ViewData["say"] = count;
@@ -92,63 +92,63 @@ namespace MVCProjem.Controllers
         public IActionResult Remove(int id)
         {
 
-            var ogrenci = _dbcontext.Ogrenciler.FirstOrDefault(p => p.Id == id);
+            var student = _dbcontext.Students.FirstOrDefault(p => p.Id == id);
 
-            _dbcontext.Ogrenciler.Remove(ogrenci);
+            _dbcontext.Students.Remove(student);
             _dbcontext.SaveChanges();
             //string connectionString = _configuration.GetConnectionString("DefaultConnection");
             //SqlConnection sql = new SqlConnection(connectionString);
             //sql.Open();
-            //string sorgu = "delete from Ogrenciler where ogrno = "+ogrenciModel.ogrno+"";
+            //string sorgu = "delete from Students where ogrno = "+studentModel.ogrno+"";
             //SqlCommand cmd = new SqlCommand(sorgu,sql);
             //cmd.ExecuteNonQuery();
             //sql.Close();
-            return RedirectToAction("Index", "Ogrenci");//return View();
+            return RedirectToAction("Index", "Student");//return View();
         }
 
 
         public IActionResult Update(int id)
         {
 
-            //var ogrenci = _dbcontext.Ogrenciler.Where(q => q.Id.Contains(ogrenciler.Id)).Take(1);
-            var ogrenci = _dbcontext.Ogrenciler.FirstOrDefault(p => p.Id == id);
+            //var student = _dbcontext.Students.Where(q => q.Id.Contains(Students.Id)).Take(1);
+            var student = _dbcontext.Students.FirstOrDefault(p => p.Id == id);
 
-            return View(); //Ogrenciler();
+            return View(); //Students();
         }
         [HttpPost]
-        public IActionResult Update(Ogrenci ogrenciModel)
+        public IActionResult Update(Student studentModel)
         {
 
-            var ogrenci = _dbcontext.Ogrenciler.AsNoTracking().FirstOrDefault(q => q.Id == ogrenciModel.Id);
-            if (ogrenci != null)
+            var student = _dbcontext.Students.AsNoTracking().FirstOrDefault(q => q.Id == studentModel.Id);
+            if (student != null)
             {
-                ogrenci.Name = ogrenciModel.Name;
-                ogrenci.Surname = ogrenciModel.Surname;
+                student.Name = studentModel.Name;
+                student.Surname = studentModel.Surname;
             }
-            _dbcontext.Ogrenciler.Update(ogrenci);
+            _dbcontext.Students.Update(student);
             _dbcontext.SaveChanges();
 
-            var temp = _dbcontext.Ogrenciler.Where(q => q.Name.Contains(ogrenciModel.Name)).Take(10).ToList();
+            var temp = _dbcontext.Students.Where(q => q.Name.Contains(studentModel.Name)).Take(10).ToList();
             #region
-            //if (ogrenciModel.ogrno == null || string.IsNullOrEmpty(ogrenciModel.ad) || string.IsNullOrEmpty(ogrenciModel.soyad))
+            //if (studentModel.ogrno == null || string.IsNullOrEmpty(studentModel.ad) || string.IsNullOrEmpty(studentModel.soyad))
             //{
             //    return BadRequest();
             //}
-            //string ad = ogrenciModel.ad;
-            //string soyad = ogrenciModel.soyad;
-            //int ogrno = ogrenciModel.ogrno;
+            //string ad = studentModel.ad;
+            //string soyad = studentModel.soyad;
+            //int ogrno = studentModel.ogrno;
             //string connectString = _dbcontext.GetConnectionString("DefaultConnection");
             //SqlConnection sql = new SqlConnection(connectString);
             //sql.Open();
-            //string sorgum = "update Ogrenciler set ad='" + ad.ToString() + "', soyad='" + soyad.ToString() + "'  where ogrno =" + ogrno + "";
+            //string sorgum = "update Students set ad='" + ad.ToString() + "', soyad='" + soyad.ToString() + "'  where ogrno =" + ogrno + "";
             //SqlCommand command = new SqlCommand(sorgum, sql);
             //command.ExecuteNonQuery();
             ////SqlDataAdapter adptr = new SqlDataAdapter(sorgum, sql);
             //sql.Close();
             #endregion
 
-            return RedirectToAction("Index", "Ogrenci");
-            //return View(); //Ogrenciler();   // revize edilecek
+            return RedirectToAction("Index", "Student");
+            //return View(); //Students();   // revize edilecek
         }
 
 

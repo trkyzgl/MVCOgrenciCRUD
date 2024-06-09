@@ -1,12 +1,12 @@
 ﻿@{
     ViewData["Title"] = "Update";
 }
-@model Ogrenci
+@model Student
 
-<h1>Update Ogrenci</h1>
+<h1>Update Student</h1>
 
 <div class=col-md-6>
-    <form asp-action="Update" method="post" asp-controller="Ogrenci">
+    <form asp-action="Update" method="post" asp-controller="Student">
         <input type="hidden" asp-for="Id" />
         <div class="form-group">
             <label asp-for="Name"></label>
@@ -19,11 +19,11 @@
             <span asp-validation-for="Surname" class="text-danger"></span>
         </div>
 
-
+        <!--
         <div class="form-group" type="hidden">
             <label ></label>
             <select asp-items="ViewBag.categories" class="form-control"></select>
-        </div>
+        </div>-->
 
 
         <div class="form-group">

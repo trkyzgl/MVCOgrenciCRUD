@@ -4,19 +4,14 @@ using MVCProjem.Models;
 
 namespace NLayer.Repository.Seeds
 {
-    internal class OgrenciSeed : IEntityTypeConfiguration<Ogrenci>
+    internal class StudentSeed : IEntityTypeConfiguration<Student>
     {
 
 
-        public void Configure(EntityTypeBuilder<Ogrenci> builder)
+        public void Configure(EntityTypeBuilder<Student> builder)
         {
-
             builder.HasData(
-                new Ogrenci { Id = 1, Name = "Ahmet", Surname = "test" },
-
-                new Ogrenci {Id = 1, Name = "Mehmet", Surname = "test" },
-
-                new Ogrenci {Id = 1, Name = "Ali", Surname = "test" }
+                new Student { Id = 3, Name = "Ahmet", Surname = "test3" }
                 );
             //throw new NotImplementedException();
 

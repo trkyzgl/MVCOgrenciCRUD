@@ -3,14 +3,13 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace MVCProjem.Models
 {
-    public class Ogrenci
+    public class Book:BaseEntity
     {
-
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int Id { get; set; }
+        //[Key]
+        //[DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        //public int Name { get; set; }
         public string Name { get; set; }
-        public string Surname { get; set; }
+
 
     }
 }

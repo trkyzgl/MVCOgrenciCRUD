@@ -8,7 +8,7 @@ builder.Services.AddControllersWithViews();
 
 
 
-builder.Services.AddDbContext<MVCProjemContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 // Bu bağlantı proje built olmadan yapılamsı gerekiyo. o sebeple hata veriyor
 

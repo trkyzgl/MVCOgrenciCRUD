@@ -4,21 +4,21 @@ using MVCProjem.Models;
 
 namespace MVCProjem.Controllers
 {
-    public class KitapController : Controller
+    public class BookController : Controller
     {
-        private readonly MVCProjemContext _dbcontext;
-        public KitapController(MVCProjemContext config)
+        private readonly AppDbContext _dbcontext;
+        public BookController(AppDbContext config)
         {
             this._dbcontext = config;
         }
         public IActionResult Index()
         {
-            if (5>= _dbcontext.Kitaplar.Take(5).ToList().Count)
+            if (5>= _dbcontext.Books.Take(5).ToList().Count)
             {
 
-            List<Kitap> kitapModels = _dbcontext.Kitaplar.Take(5).ToList();
-            var lastFiveEntities = _dbcontext.Kitaplar
-            .OrderByDescending(e => e.kitapno) // Varsayılan olarak Id'ye göre sıralama, değiştirilebilir
+            List<Book> kitapModels = _dbcontext.Books.Take(5).ToList();
+            var lastFiveEntities = _dbcontext.Books
+            .OrderByDescending(e => e.Id) // Varsayılan olarak Id'ye göre sıralama, değiştirilebilir
             //.Take(5)  // kaç tane ğrencinin çekileceğini...
             .ToList();
             kitapModels = lastFiveEntities;
